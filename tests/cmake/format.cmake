@@ -4,7 +4,7 @@ set(_FMT_TAGS_DIR "${PROJECT_BINARY_DIR}/_fmt")
 find_program(CLANG_FORMAT clang-format)
 if(CLANG_FORMAT)
     foreach(_CXX_FILE "${PROJECT_SOURCE_DIR}/../stipp.hpp" "${PROJECT_SOURCE_DIR}/tests.cpp")
-        get_filename_component(_FMT_TAG_NAME "${_FMT_TAG}" NAME)
+        get_filename_component(_FMT_TAG_NAME "${_CXX_FILE}" NAME)
         set(_FMT_TAG "${_FMT_TAGS_DIR}/${_FMT_TAG_NAME}.tag")
         add_custom_command(
             OUTPUT "${_FMT_TAG}"
