@@ -1,12 +1,21 @@
 #include <catch2/catch_test_macros.hpp>
-#include <stipp.hpp>
+#include <stipp.hpp> // IWYU pragma: associated
 
+#include <cstddef>
+#include <cstdint>
+#include <limits>
 #include <sstream>
+#include <string>
+#include <type_traits>
+
+#if __has_include(<format>)
+#include <format>
+#endif
 
 using namespace stipp::types;
 using namespace stipp::literals;
 
-TEST_CASE("literals", "[literals]") {
+TEST_CASE("literals", "[literals]") { // NOLINT
     REQUIRE(0_u8 == u8{0});
     REQUIRE(0_u16 == u16{0});
     REQUIRE(0_u32 == u32{0});
@@ -30,7 +39,7 @@ TEST_CASE("literals", "[literals]") {
     REQUIRE(42_iz == isize{42});
 }
 
-TEST_CASE("unary plus", "[ops]") {
+TEST_CASE("unary plus", "[ops]") { // NOLINT
     REQUIRE(+42_u8 == 42_u8);
     REQUIRE(+42_u16 == 42_u16);
     REQUIRE(+42_u32 == 42_u32);
@@ -43,7 +52,7 @@ TEST_CASE("unary plus", "[ops]") {
     REQUIRE(+42_iz == 42_iz);
 }
 
-TEST_CASE("unary minus", "[ops]") {
+TEST_CASE("unary minus", "[ops]") { // NOLINT
     REQUIRE(-42_u8 == u8{static_cast<std::uint8_t>(-std::uint8_t{42})});
     REQUIRE(-42_u16 == u16{static_cast<std::uint16_t>(-std::uint16_t{42})});
     REQUIRE(-42_u32 == u32{static_cast<std::uint32_t>(-std::uint32_t{42})});
@@ -67,7 +76,7 @@ TEST_CASE("unary minus", "[ops]") {
     REQUIRE(-(-42_iz) == 42_iz);
 }
 
-TEST_CASE("invert", "[ops]") {
+TEST_CASE("invert", "[ops]") { // NOLINT
     REQUIRE(~42_u8 == u8{static_cast<std::uint8_t>(~std::uint8_t{42})});
     REQUIRE(~42_u16 == u16{static_cast<std::uint16_t>(~std::uint16_t{42})});
     REQUIRE(~42_u32 == u32{static_cast<std::uint32_t>(~std::uint32_t{42})});
@@ -91,7 +100,7 @@ TEST_CASE("invert", "[ops]") {
     REQUIRE(~(~42_iz) == 42_iz);
 }
 
-TEST_CASE("pre increment", "[ops]") {
+TEST_CASE("pre increment", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -126,7 +135,7 @@ TEST_CASE("pre increment", "[ops]") {
     REQUIRE(val_iz == 43_iz);
 }
 
-TEST_CASE("post increment", "[ops]") {
+TEST_CASE("post increment", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -161,7 +170,7 @@ TEST_CASE("post increment", "[ops]") {
     REQUIRE(val_iz == 43_iz);
 }
 
-TEST_CASE("pre decrement", "[ops]") {
+TEST_CASE("pre decrement", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -196,7 +205,7 @@ TEST_CASE("pre decrement", "[ops]") {
     REQUIRE(val_iz == 41_iz);
 }
 
-TEST_CASE("post decrement", "[ops]") {
+TEST_CASE("post decrement", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -231,7 +240,7 @@ TEST_CASE("post decrement", "[ops]") {
     REQUIRE(val_iz == 41_iz);
 }
 
-TEST_CASE("add assign", "[ops]") {
+TEST_CASE("add assign", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -266,7 +275,7 @@ TEST_CASE("add assign", "[ops]") {
     REQUIRE(val_iz == 52_iz);
 }
 
-TEST_CASE("sub assign", "[ops]") {
+TEST_CASE("sub assign", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -301,7 +310,7 @@ TEST_CASE("sub assign", "[ops]") {
     REQUIRE(val_iz == 32_iz);
 }
 
-TEST_CASE("mul assign", "[ops]") {
+TEST_CASE("mul assign", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -336,7 +345,7 @@ TEST_CASE("mul assign", "[ops]") {
     REQUIRE(val_iz == 84_iz);
 }
 
-TEST_CASE("div assign", "[ops]") {
+TEST_CASE("div assign", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -371,7 +380,7 @@ TEST_CASE("div assign", "[ops]") {
     REQUIRE(val_iz == 21_iz);
 }
 
-TEST_CASE("mod assign", "[ops]") {
+TEST_CASE("mod assign", "[ops]") { // NOLINT
     auto val_u8 = 42_u8;
     auto val_u16 = 42_u16;
     auto val_u32 = 42_u32;
@@ -406,7 +415,7 @@ TEST_CASE("mod assign", "[ops]") {
     REQUIRE(val_iz == 2_iz);
 }
 
-TEST_CASE("and assign", "[ops]") {
+TEST_CASE("and assign", "[ops]") { // NOLINT
     auto val_u8 = 0x0c_u8;
     auto val_u16 = 0x0c_u16;
     auto val_u32 = 0x0c_u32;
@@ -441,7 +450,7 @@ TEST_CASE("and assign", "[ops]") {
     REQUIRE(val_iz == 8_iz);
 }
 
-TEST_CASE("or assign", "[ops]") {
+TEST_CASE("or assign", "[ops]") { // NOLINT
     auto val_u8 = 0x0c_u8;
     auto val_u16 = 0x0c_u16;
     auto val_u32 = 0x0c_u32;
@@ -476,7 +485,7 @@ TEST_CASE("or assign", "[ops]") {
     REQUIRE(val_iz == 0x0d_iz);
 }
 
-TEST_CASE("xor assign", "[ops]") {
+TEST_CASE("xor assign", "[ops]") { // NOLINT
     auto val_u8 = 0x0c_u8;
     auto val_u16 = 0x0c_u16;
     auto val_u32 = 0x0c_u32;
@@ -511,7 +520,7 @@ TEST_CASE("xor assign", "[ops]") {
     REQUIRE(val_iz == 5_iz);
 }
 
-TEST_CASE("shift left assign", "[ops]") {
+TEST_CASE("shift left assign", "[ops]") { // NOLINT
     auto val_u8 = 0x0c_u8;
     auto val_u16 = 0x0c_u16;
     auto val_u32 = 0x0c_u32;
@@ -579,7 +588,7 @@ TEST_CASE("shift left assign", "[ops]") {
     REQUIRE(val_iz == 0x18_iz);
 }
 
-TEST_CASE("shift right assign", "[ops]") {
+TEST_CASE("shift right assign", "[ops]") { // NOLINT
     auto val_u8 = 0x0c_u8;
     auto val_u16 = 0x0c_u16;
     auto val_u32 = 0x0c_u32;
@@ -647,7 +656,7 @@ TEST_CASE("shift right assign", "[ops]") {
     REQUIRE(val_iz == 6_iz);
 }
 
-TEST_CASE("add", "[ops]") {
+TEST_CASE("add", "[ops]") { // NOLINT
     REQUIRE((42_u8 + 10_u8) == 52_u8);
     REQUIRE((42_u16 + 10_u16) == 52_u16);
     REQUIRE((42_u32 + 10_u32) == 52_u32);
@@ -660,7 +669,7 @@ TEST_CASE("add", "[ops]") {
     REQUIRE((42_iz + 10_iz) == 52_iz);
 }
 
-TEST_CASE("sub", "[ops]") {
+TEST_CASE("sub", "[ops]") { // NOLINT
     REQUIRE((42_u8 - 10_u8) == 32_u8);
     REQUIRE((42_u16 - 10_u16) == 32_u16);
     REQUIRE((42_u32 - 10_u32) == 32_u32);
@@ -673,7 +682,7 @@ TEST_CASE("sub", "[ops]") {
     REQUIRE((42_iz - 10_iz) == 32_iz);
 }
 
-TEST_CASE("mul", "[ops]") {
+TEST_CASE("mul", "[ops]") { // NOLINT
     REQUIRE((42_u8 * 2_u8) == 84_u8);
     REQUIRE((42_u16 * 2_u16) == 84_u16);
     REQUIRE((42_u32 * 2_u32) == 84_u32);
@@ -686,7 +695,7 @@ TEST_CASE("mul", "[ops]") {
     REQUIRE((42_iz * 2_iz) == 84_iz);
 }
 
-TEST_CASE("div", "[ops]") {
+TEST_CASE("div", "[ops]") { // NOLINT
     REQUIRE((42_u8 / 2_u8) == 21_u8);
     REQUIRE((42_u16 / 2_u16) == 21_u16);
     REQUIRE((42_u32 / 2_u32) == 21_u32);
@@ -699,7 +708,7 @@ TEST_CASE("div", "[ops]") {
     REQUIRE((42_iz / 2_iz) == 21_iz);
 }
 
-TEST_CASE("mod", "[ops]") {
+TEST_CASE("mod", "[ops]") { // NOLINT
     REQUIRE((42_u8 % 10_u8) == 2_u8);
     REQUIRE((42_u16 % 10_u16) == 2_u16);
     REQUIRE((42_u32 % 10_u32) == 2_u32);
@@ -712,7 +721,7 @@ TEST_CASE("mod", "[ops]") {
     REQUIRE((42_iz % 10_iz) == 2_iz);
 }
 
-TEST_CASE("and", "[ops]") {
+TEST_CASE("and", "[ops]") { // NOLINT
     REQUIRE((0x0c_u8 & 9_u8) == 8_u8);
     REQUIRE((0x0c_u16 & 9_u16) == 8_u16);
     REQUIRE((0x0c_u32 & 9_u32) == 8_u32);
@@ -725,7 +734,7 @@ TEST_CASE("and", "[ops]") {
     REQUIRE((0x0c_iz & 9_iz) == 8_iz);
 }
 
-TEST_CASE("or", "[ops]") {
+TEST_CASE("or", "[ops]") { // NOLINT
     REQUIRE((0x0c_u8 | 9_u8) == 0x0d_u8);
     REQUIRE((0x0c_u16 | 9_u16) == 0x0d_u16);
     REQUIRE((0x0c_u32 | 9_u32) == 0x0d_u32);
@@ -738,7 +747,7 @@ TEST_CASE("or", "[ops]") {
     REQUIRE((0x0c_iz | 9_iz) == 0x0d_iz);
 }
 
-TEST_CASE("xor", "[ops]") {
+TEST_CASE("xor", "[ops]") { // NOLINT
     REQUIRE((0x0c_u8 ^ 9_u8) == 5_u8);
     REQUIRE((0x0c_u16 ^ 9_u16) == 5_u16);
     REQUIRE((0x0c_u32 ^ 9_u32) == 5_u32);
@@ -751,7 +760,7 @@ TEST_CASE("xor", "[ops]") {
     REQUIRE((0x0c_iz ^ 9_iz) == 5_iz);
 }
 
-TEST_CASE("shift left", "[ops]") {
+TEST_CASE("shift left", "[ops]") { // NOLINT
     REQUIRE((0x0c_u8 << 1_iz) == 0x18_u8);
     REQUIRE((0x0c_u16 << 1_iz) == 0x18_u16);
     REQUIRE((0x0c_u32 << 1_iz) == 0x18_u32);
@@ -775,7 +784,7 @@ TEST_CASE("shift left", "[ops]") {
     REQUIRE((0x0c_iz << 1) == 0x18_iz);
 }
 
-TEST_CASE("shift right", "[ops]") {
+TEST_CASE("shift right", "[ops]") { // NOLINT
     REQUIRE((0x0c_u8 >> 1_iz) == 6_u8);
     REQUIRE((0x0c_u16 >> 1_iz) == 6_u16);
     REQUIRE((0x0c_u32 >> 1_iz) == 6_u32);
@@ -799,7 +808,7 @@ TEST_CASE("shift right", "[ops]") {
     REQUIRE((0x0c_iz >> 1) == 6_iz);
 }
 
-TEST_CASE("ostream format", "[format]") {
+TEST_CASE("ostream format", "[format]") { // NOLINT
     std::stringstream ss;
 
     ss = std::stringstream();
@@ -843,7 +852,7 @@ TEST_CASE("ostream format", "[format]") {
     REQUIRE(ss.str() == "42");
 }
 
-TEST_CASE("istream format", "[format]") {
+TEST_CASE("istream format", "[format]") { // NOLINT
     std::stringstream ss;
 
     ss = std::stringstream("42");
@@ -899,7 +908,7 @@ TEST_CASE("istream format", "[format]") {
 
 #if __has_include(<format>)
 
-TEST_CASE("formatter", "[format]") {
+TEST_CASE("formatter", "[format]") { // NOLINT
     REQUIRE(std::format("{}", 42_u8) == "42");
     REQUIRE(std::format("{}", 42_u16) == "42");
     REQUIRE(std::format("{}", 42_u32) == "42");
@@ -914,7 +923,7 @@ TEST_CASE("formatter", "[format]") {
 
 #endif
 
-TEST_CASE("is_stipp_int", "[traits]") {
+TEST_CASE("is_stipp_int", "[traits]") { // NOLINT
     STATIC_REQUIRE(stipp::is_stipp_int_v<u8>);
     STATIC_REQUIRE(stipp::is_stipp_int_v<u16>);
     STATIC_REQUIRE(stipp::is_stipp_int_v<u32>);
@@ -929,7 +938,7 @@ TEST_CASE("is_stipp_int", "[traits]") {
     STATIC_REQUIRE(!stipp::is_stipp_int_v<int>);
 }
 
-TEST_CASE("is_integral", "[traits]") {
+TEST_CASE("is_integral", "[traits]") { // NOLINT
     STATIC_REQUIRE(stipp::is_integral_v<u8>);
     STATIC_REQUIRE(stipp::is_integral_v<u16>);
     STATIC_REQUIRE(stipp::is_integral_v<u32>);
@@ -944,7 +953,7 @@ TEST_CASE("is_integral", "[traits]") {
     STATIC_REQUIRE(stipp::is_integral_v<int>);
 }
 
-TEST_CASE("is_arithmetic", "[traits]") {
+TEST_CASE("is_arithmetic", "[traits]") { // NOLINT
     STATIC_REQUIRE(stipp::is_arithmetic_v<u8>);
     STATIC_REQUIRE(stipp::is_arithmetic_v<u16>);
     STATIC_REQUIRE(stipp::is_arithmetic_v<u32>);
@@ -960,7 +969,7 @@ TEST_CASE("is_arithmetic", "[traits]") {
     STATIC_REQUIRE(stipp::is_arithmetic_v<float>);
 }
 
-TEST_CASE("is_signed", "[traits]") {
+TEST_CASE("is_signed", "[traits]") { // NOLINT
     STATIC_REQUIRE(!stipp::is_signed_v<u8>);
     STATIC_REQUIRE(!stipp::is_signed_v<u16>);
     STATIC_REQUIRE(!stipp::is_signed_v<u32>);
@@ -976,7 +985,7 @@ TEST_CASE("is_signed", "[traits]") {
     STATIC_REQUIRE(!stipp::is_signed_v<unsigned int>);
 }
 
-TEST_CASE("is_unsigned", "[traits]") {
+TEST_CASE("is_unsigned", "[traits]") { // NOLINT
     STATIC_REQUIRE(stipp::is_unsigned_v<u8>);
     STATIC_REQUIRE(stipp::is_unsigned_v<u16>);
     STATIC_REQUIRE(stipp::is_unsigned_v<u32>);
@@ -992,7 +1001,7 @@ TEST_CASE("is_unsigned", "[traits]") {
     STATIC_REQUIRE(stipp::is_unsigned_v<unsigned int>);
 }
 
-TEST_CASE("make_signed", "[traits]") {
+TEST_CASE("make_signed", "[traits]") { // NOLINT
     STATIC_REQUIRE(std::is_same_v<stipp::make_signed_t<u8>, i8>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_signed_t<u16>, i16>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_signed_t<u32>, i32>);
@@ -1008,7 +1017,7 @@ TEST_CASE("make_signed", "[traits]") {
     STATIC_REQUIRE(std::is_same_v<stipp::make_signed_t<unsigned int>, int>);
 }
 
-TEST_CASE("make_unsigned", "[traits]") {
+TEST_CASE("make_unsigned", "[traits]") { // NOLINT
     STATIC_REQUIRE(std::is_same_v<stipp::make_unsigned_t<u8>, u8>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_unsigned_t<u16>, u16>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_unsigned_t<u32>, u32>);
@@ -1026,7 +1035,7 @@ TEST_CASE("make_unsigned", "[traits]") {
 
 #ifdef STIPP_UB_TRAITS
 
-TEST_CASE("std::is_integral", "[std_traits]") {
+TEST_CASE("std::is_integral", "[std_traits]") { // NOLINT
     STATIC_REQUIRE(std::is_integral_v<u8>);
     STATIC_REQUIRE(std::is_integral_v<u16>);
     STATIC_REQUIRE(std::is_integral_v<u32>);
@@ -1041,7 +1050,7 @@ TEST_CASE("std::is_integral", "[std_traits]") {
     STATIC_REQUIRE(std::is_integral_v<int>);
 }
 
-TEST_CASE("std::is_arithmetic", "[std_traits]") {
+TEST_CASE("std::is_arithmetic", "[std_traits]") { // NOLINT
     STATIC_REQUIRE(std::is_arithmetic_v<u8>);
     STATIC_REQUIRE(std::is_arithmetic_v<u16>);
     STATIC_REQUIRE(std::is_arithmetic_v<u32>);
@@ -1057,7 +1066,7 @@ TEST_CASE("std::is_arithmetic", "[std_traits]") {
     STATIC_REQUIRE(std::is_arithmetic_v<float>);
 }
 
-TEST_CASE("std::is_signed", "[std_traits]") {
+TEST_CASE("std::is_signed", "[std_traits]") { // NOLINT
     STATIC_REQUIRE(!std::is_signed_v<u8>);
     STATIC_REQUIRE(!std::is_signed_v<u16>);
     STATIC_REQUIRE(!std::is_signed_v<u32>);
@@ -1073,7 +1082,7 @@ TEST_CASE("std::is_signed", "[std_traits]") {
     STATIC_REQUIRE(!std::is_signed_v<unsigned int>);
 }
 
-TEST_CASE("std::is_unsigned", "[std_traits]") {
+TEST_CASE("std::is_unsigned", "[std_traits]") { // NOLINT
     STATIC_REQUIRE(std::is_unsigned_v<u8>);
     STATIC_REQUIRE(std::is_unsigned_v<u16>);
     STATIC_REQUIRE(std::is_unsigned_v<u32>);
@@ -1089,7 +1098,7 @@ TEST_CASE("std::is_unsigned", "[std_traits]") {
     STATIC_REQUIRE(std::is_unsigned_v<unsigned int>);
 }
 
-TEST_CASE("std::make_signed", "[std_traits]") {
+TEST_CASE("std::make_signed", "[std_traits]") { // NOLINT
     STATIC_REQUIRE(std::is_same_v<std::make_signed_t<u8>, i8>);
     STATIC_REQUIRE(std::is_same_v<std::make_signed_t<u16>, i16>);
     STATIC_REQUIRE(std::is_same_v<std::make_signed_t<u32>, i32>);
@@ -1105,7 +1114,7 @@ TEST_CASE("std::make_signed", "[std_traits]") {
     STATIC_REQUIRE(std::is_same_v<std::make_signed_t<unsigned int>, int>);
 }
 
-TEST_CASE("std::make_unsigned", "[std_traits]") {
+TEST_CASE("std::make_unsigned", "[std_traits]") { // NOLINT
     STATIC_REQUIRE(std::is_same_v<std::make_unsigned_t<u8>, u8>);
     STATIC_REQUIRE(std::is_same_v<std::make_unsigned_t<u16>, u16>);
     STATIC_REQUIRE(std::is_same_v<std::make_unsigned_t<u32>, u32>);
@@ -1123,7 +1132,7 @@ TEST_CASE("std::make_unsigned", "[std_traits]") {
 
 #endif
 
-TEST_CASE("numeric_limits::max", "[limits]") {
+TEST_CASE("numeric_limits::max", "[limits]") { // NOLINT
     STATIC_REQUIRE(std::numeric_limits<u8>::max() == u8{std::numeric_limits<std::uint8_t>::max()});
     STATIC_REQUIRE(std::numeric_limits<u16>::max() == u16{std::numeric_limits<std::uint16_t>::max()});
     STATIC_REQUIRE(std::numeric_limits<u32>::max() == u32{std::numeric_limits<std::uint32_t>::max()});
@@ -1136,7 +1145,7 @@ TEST_CASE("numeric_limits::max", "[limits]") {
     STATIC_REQUIRE(std::numeric_limits<isize>::max() == isize{std::numeric_limits<std::ptrdiff_t>::max()});
 }
 
-TEST_CASE("numeric_limits::min", "[limits]") {
+TEST_CASE("numeric_limits::min", "[limits]") { // NOLINT
     STATIC_REQUIRE(std::numeric_limits<u8>::min() == u8{std::numeric_limits<std::uint8_t>::min()});
     STATIC_REQUIRE(std::numeric_limits<u16>::min() == u16{std::numeric_limits<std::uint16_t>::min()});
     STATIC_REQUIRE(std::numeric_limits<u32>::min() == u32{std::numeric_limits<std::uint32_t>::min()});
@@ -1149,7 +1158,7 @@ TEST_CASE("numeric_limits::min", "[limits]") {
     STATIC_REQUIRE(std::numeric_limits<isize>::min() == isize{std::numeric_limits<std::ptrdiff_t>::min()});
 }
 
-TEST_CASE("numeric_limits::lowest", "[limits]") {
+TEST_CASE("numeric_limits::lowest", "[limits]") { // NOLINT
     STATIC_REQUIRE(std::numeric_limits<u8>::lowest() == u8{std::numeric_limits<std::uint8_t>::lowest()});
     STATIC_REQUIRE(std::numeric_limits<u16>::lowest() == u16{std::numeric_limits<std::uint16_t>::lowest()});
     STATIC_REQUIRE(std::numeric_limits<u32>::lowest() == u32{std::numeric_limits<std::uint32_t>::lowest()});
@@ -1162,7 +1171,7 @@ TEST_CASE("numeric_limits::lowest", "[limits]") {
     STATIC_REQUIRE(std::numeric_limits<isize>::lowest() == isize{std::numeric_limits<std::ptrdiff_t>::lowest()});
 }
 
-TEST_CASE("numeric_limits::digits", "[limits]") {
+TEST_CASE("numeric_limits::digits", "[limits]") { // NOLINT
     STATIC_REQUIRE(std::numeric_limits<u8>::digits == 8);
     STATIC_REQUIRE(std::numeric_limits<u16>::digits == 16);
     STATIC_REQUIRE(std::numeric_limits<u32>::digits == 32);

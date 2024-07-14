@@ -28,6 +28,7 @@
 #include <compare>
 #include <cstddef>
 #include <cstdint>
+#include <functional>
 #include <iostream>
 #include <limits>
 #include <stdexcept>
@@ -36,6 +37,22 @@
 #if __has_include(<format>)
 #include <format>
 #endif
+
+// IWYU pragma: no_include <variant>
+// IWYU pragma: no_forward_declare std::formatter
+// IWYU pragma: no_forward_declare std::hash
+// IWYU pragma: no_forward_declare std::numeric_limits
+// IWYU pragma: no_forward_declare std::is_integral
+// IWYU pragma: no_forward_declare std::is_arithmetic
+// IWYU pragma: no_forward_declare std::is_signed
+// IWYU pragma: no_forward_declare std::is_unsigned
+// IWYU pragma: no_forward_declare std::make_signed
+// IWYU pragma: no_forward_declare std::make_unsigned
+// IWYU pragma: no_forward_declare stipp::is_stipp_int
+// IWYU pragma: no_forward_declare stipp::is_integral
+// IWYU pragma: no_forward_declare stipp::is_arithmetic
+// IWYU pragma: no_forward_declare stipp::is_signed
+// IWYU pragma: no_forward_declare stipp::is_unsigned
 
 // Uncomment or define this macro to implement std type traits
 // such as std::is_integral. Be warned: The standard specifies
@@ -491,7 +508,7 @@ struct make_unsigned<isize> {
     } \
     \
     constexpr type operator++(type& x, int) noexcept { \
-        type ret = x; \
+        const type ret = x; \
         ++x; \
         return ret; \
     } \
@@ -502,7 +519,7 @@ struct make_unsigned<isize> {
     } \
     \
     constexpr type operator--(type& x, int) noexcept { \
-        type ret = x; \
+        const type ret = x; \
         --x; \
         return ret; \
     } \

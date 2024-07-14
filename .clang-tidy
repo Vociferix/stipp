@@ -1,0 +1,24 @@
+---
+Checks: "*,
+         -abseil-*,
+         -altera-*,
+         -android-*,
+         -fuchsia-*,
+         -google-*,
+         -llvm*,
+         -zircon-*,
+         -cppcoreguidelines-avoid-do-while,
+         -hicpp-uppercase-literal-suffix,
+         -readability-uppercase-literal-suffix,
+         -cppcoreguidelines-avoid-magic-numbers,
+         -readability-magic-numbers,
+         -hicpp-signed-bitwise,
+         -readability-identifier-length,
+         -misc-include-cleaner,
+         -cppcoreguidelines-macro-usage,
+         -modernize-use-trailing-return-type,
+         -cert-dcl21-cpp,
+         -bugprone-macro-parentheses
+"
+HeaderFilterRegex: 'stipp.hpp'
+FormatStyle: file
