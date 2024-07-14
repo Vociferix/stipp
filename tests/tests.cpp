@@ -37,6 +37,17 @@ TEST_CASE("literals", "[literals]") {
     REQUIRE(42_i32 == i32{42});
     REQUIRE(42_i64 == i64{42});
     REQUIRE(42_iz == isize{42});
+
+    REQUIRE(42_U8 == 42_u8);
+    REQUIRE(42_U16 == 42_u16);
+    REQUIRE(42_U32 == 42_u32);
+    REQUIRE(42_U64 == 42_u64);
+    REQUIRE(42_UZ == 42_uz);
+    REQUIRE(42_I8 == 42_i8);
+    REQUIRE(42_I16 == 42_i16);
+    REQUIRE(42_I32 == 42_i32);
+    REQUIRE(42_I64 == 42_i64);
+    REQUIRE(42_IZ == 42_iz);
 }
 
 TEST_CASE("unary plus", "[ops]") {

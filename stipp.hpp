@@ -120,6 +120,8 @@ consteval u8 operator""_u8(unsigned long long int val) {
     return static_cast<u8>(static_cast<std::uint8_t>(val));
 }
 
+consteval u8 operator""_U8(unsigned long long int val) { return operator""_u8(val); }
+
 consteval u16 operator""_u16(unsigned long long int val) {
     if (val >
         static_cast<unsigned long long int>((std::numeric_limits<std::uint16_t>::max)())) {
@@ -127,6 +129,8 @@ consteval u16 operator""_u16(unsigned long long int val) {
     }
     return static_cast<u16>(static_cast<std::uint16_t>(val));
 }
+
+consteval u16 operator""_U16(unsigned long long int val) { return operator""_u16(val); }
 
 consteval u32 operator""_u32(unsigned long long int val) {
     if (val >
@@ -136,6 +140,8 @@ consteval u32 operator""_u32(unsigned long long int val) {
     return static_cast<u32>(static_cast<std::uint32_t>(val));
 }
 
+consteval u32 operator""_U32(unsigned long long int val) { return operator""_u32(val); }
+
 consteval u64 operator""_u64(unsigned long long int val) {
     if (val >
         static_cast<unsigned long long int>((std::numeric_limits<std::uint64_t>::max)())) {
@@ -143,6 +149,8 @@ consteval u64 operator""_u64(unsigned long long int val) {
     }
     return static_cast<u64>(static_cast<std::uint64_t>(val));
 }
+
+consteval u64 operator""_U64(unsigned long long int val) { return operator""_u64(val); }
 
 consteval usize operator""_uz(unsigned long long int val) {
     if (val >
@@ -152,6 +160,8 @@ consteval usize operator""_uz(unsigned long long int val) {
     return static_cast<usize>(static_cast<std::size_t>(val));
 }
 
+consteval usize operator""_UZ(unsigned long long int val) { return operator""_uz(val); }
+
 consteval i8 operator""_i8(unsigned long long int val) {
     if (val >
         static_cast<unsigned long long int>((std::numeric_limits<std::int8_t>::max)())) {
@@ -159,6 +169,8 @@ consteval i8 operator""_i8(unsigned long long int val) {
     }
     return static_cast<i8>(static_cast<std::int8_t>(val));
 }
+
+consteval i8 operator""_I8(unsigned long long int val) { return operator""_i8(val); }
 
 consteval i16 operator""_i16(unsigned long long int val) {
     if (val >
@@ -168,6 +180,8 @@ consteval i16 operator""_i16(unsigned long long int val) {
     return static_cast<i16>(static_cast<std::int16_t>(val));
 }
 
+consteval i16 operator""_I16(unsigned long long int val) { return operator""_i16(val); }
+
 consteval i32 operator""_i32(unsigned long long int val) {
     if (val >
         static_cast<unsigned long long int>((std::numeric_limits<std::int32_t>::max)())) {
@@ -175,6 +189,8 @@ consteval i32 operator""_i32(unsigned long long int val) {
     }
     return static_cast<i32>(static_cast<std::int32_t>(val));
 }
+
+consteval i32 operator""_I32(unsigned long long int val) { return operator""_i32(val); }
 
 consteval i64 operator""_i64(unsigned long long int val) {
     if (val >
@@ -184,6 +200,8 @@ consteval i64 operator""_i64(unsigned long long int val) {
     return static_cast<i64>(static_cast<std::int64_t>(val));
 }
 
+consteval i64 operator""_I64(unsigned long long int val) { return operator""_i64(val); }
+
 consteval isize operator""_iz(unsigned long long int val) {
     if (val >
         static_cast<unsigned long long int>((std::numeric_limits<std::ptrdiff_t>::max)())) {
@@ -191,6 +209,8 @@ consteval isize operator""_iz(unsigned long long int val) {
     }
     return static_cast<isize>(static_cast<std::ptrdiff_t>(val));
 }
+
+consteval isize operator""_IZ(unsigned long long int val) { return operator""_iz(val); }
 
 } // namespace literals
 
