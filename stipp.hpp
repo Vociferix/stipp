@@ -692,6 +692,7 @@ inline std::istream& operator>>(std::istream& is, i8& x) {
     \
     template <> \
     class std::numeric_limits<stipp::type> : public std::numeric_limits<stipp::detail::repr_t<stipp::type>> { \
+      public: \
         static constexpr stipp::type max /**/ () noexcept { \
             return static_cast<stipp::type>((std::numeric_limits<stipp::detail::repr_t<stipp::type>>::max)()); \
         } \
