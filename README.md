@@ -118,3 +118,25 @@ character types).
     * `template <typename T> using make_unsigned_t;`
 * For all the type traits above, STL traits can also be made to support `stipp` integers
   * Requires defining the `STIPP_UB_TRAITS` macro. See [Limitations](#limitations).
+
+## Project Integration
+To integrate `stipp` into your project, either copy `stipp.hpp` into your project, or
+add the path to this repository to your include directories. If you want to enable
+support for STL type traits (see [Limitations](#limitations)!), additionally define
+the `STIPP_UB_TRAITS` macro, either by compiler argument or by `#define` before
+including `stipp.hpp`.
+
+### CMake Example
+```cmake
+add_library(stipp INTERFACE)
+target_include_directories(stipp INTERFACE ${PATH_TO_STIPP})
+
+target_link_libraries(my_program PUBLIC stipp)
+```
+
+### Meson Example
+```meson
+stipp_incl = include_directories(path_to_stipp)
+
+executable('my_program', ..., include_directories : stipp_incl)
+```
