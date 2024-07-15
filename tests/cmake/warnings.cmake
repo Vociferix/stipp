@@ -30,6 +30,9 @@ set(MSVC_WARNINGS
     /w14928 # illegal copy-initialization; more than one user-defined conversion has been
             # implicitly applied
     /permissive- # standards conformance mode for MSVC compiler.
+
+    # Disabled warnings
+    /wd4146 # unary minus operator applied to unsigned type, result still unsigned
 )
 set(CLANG_WARNINGS
     -Wall
