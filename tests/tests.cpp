@@ -935,6 +935,21 @@ TEST_CASE("formatter", "[format]") {
 #endif
 
 TEST_CASE("is_stipp_int", "[traits]") {
+    STATIC_REQUIRE(stipp::is_stipp_int<u8>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<u16>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<u32>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<u64>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<usize>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<i8>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<i16>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<i32>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<i64>::value);
+    STATIC_REQUIRE(stipp::is_stipp_int<isize>::value);
+
+    STATIC_REQUIRE(!stipp::is_stipp_int<int>::value);
+}
+
+TEST_CASE("is_stipp_int_v", "[traits]") {
     STATIC_REQUIRE(stipp::is_stipp_int_v<u8>);
     STATIC_REQUIRE(stipp::is_stipp_int_v<u16>);
     STATIC_REQUIRE(stipp::is_stipp_int_v<u32>);
@@ -949,7 +964,37 @@ TEST_CASE("is_stipp_int", "[traits]") {
     STATIC_REQUIRE(!stipp::is_stipp_int_v<int>);
 }
 
+TEST_CASE("stipp_int", "[traits]") {
+    STATIC_REQUIRE(stipp::stipp_int<u8>);
+    STATIC_REQUIRE(stipp::stipp_int<u16>);
+    STATIC_REQUIRE(stipp::stipp_int<u32>);
+    STATIC_REQUIRE(stipp::stipp_int<u64>);
+    STATIC_REQUIRE(stipp::stipp_int<usize>);
+    STATIC_REQUIRE(stipp::stipp_int<i8>);
+    STATIC_REQUIRE(stipp::stipp_int<i16>);
+    STATIC_REQUIRE(stipp::stipp_int<i32>);
+    STATIC_REQUIRE(stipp::stipp_int<i64>);
+    STATIC_REQUIRE(stipp::stipp_int<isize>);
+
+    STATIC_REQUIRE(!stipp::stipp_int<int>);
+}
+
 TEST_CASE("is_integral", "[traits]") {
+    STATIC_REQUIRE(stipp::is_integral<u8>::value);
+    STATIC_REQUIRE(stipp::is_integral<u16>::value);
+    STATIC_REQUIRE(stipp::is_integral<u32>::value);
+    STATIC_REQUIRE(stipp::is_integral<u64>::value);
+    STATIC_REQUIRE(stipp::is_integral<usize>::value);
+    STATIC_REQUIRE(stipp::is_integral<i8>::value);
+    STATIC_REQUIRE(stipp::is_integral<i16>::value);
+    STATIC_REQUIRE(stipp::is_integral<i32>::value);
+    STATIC_REQUIRE(stipp::is_integral<i64>::value);
+    STATIC_REQUIRE(stipp::is_integral<isize>::value);
+
+    STATIC_REQUIRE(stipp::is_integral<int>::value);
+}
+
+TEST_CASE("is_integral_v", "[traits]") {
     STATIC_REQUIRE(stipp::is_integral_v<u8>);
     STATIC_REQUIRE(stipp::is_integral_v<u16>);
     STATIC_REQUIRE(stipp::is_integral_v<u32>);
@@ -964,7 +1009,38 @@ TEST_CASE("is_integral", "[traits]") {
     STATIC_REQUIRE(stipp::is_integral_v<int>);
 }
 
+TEST_CASE("integral", "[traits]") {
+    STATIC_REQUIRE(stipp::integral<u8>);
+    STATIC_REQUIRE(stipp::integral<u16>);
+    STATIC_REQUIRE(stipp::integral<u32>);
+    STATIC_REQUIRE(stipp::integral<u64>);
+    STATIC_REQUIRE(stipp::integral<usize>);
+    STATIC_REQUIRE(stipp::integral<i8>);
+    STATIC_REQUIRE(stipp::integral<i16>);
+    STATIC_REQUIRE(stipp::integral<i32>);
+    STATIC_REQUIRE(stipp::integral<i64>);
+    STATIC_REQUIRE(stipp::integral<isize>);
+
+    STATIC_REQUIRE(stipp::integral<int>);
+}
+
 TEST_CASE("is_arithmetic", "[traits]") {
+    STATIC_REQUIRE(stipp::is_arithmetic<u8>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<u16>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<u32>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<u64>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<usize>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<i8>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<i16>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<i32>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<i64>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<isize>::value);
+
+    STATIC_REQUIRE(stipp::is_arithmetic<int>::value);
+    STATIC_REQUIRE(stipp::is_arithmetic<float>::value);
+}
+
+TEST_CASE("is_arithmetic_v", "[traits]") {
     STATIC_REQUIRE(stipp::is_arithmetic_v<u8>);
     STATIC_REQUIRE(stipp::is_arithmetic_v<u16>);
     STATIC_REQUIRE(stipp::is_arithmetic_v<u32>);
@@ -980,7 +1056,39 @@ TEST_CASE("is_arithmetic", "[traits]") {
     STATIC_REQUIRE(stipp::is_arithmetic_v<float>);
 }
 
+TEST_CASE("arithmetic", "[traits]") {
+    STATIC_REQUIRE(stipp::arithmetic<u8>);
+    STATIC_REQUIRE(stipp::arithmetic<u16>);
+    STATIC_REQUIRE(stipp::arithmetic<u32>);
+    STATIC_REQUIRE(stipp::arithmetic<u64>);
+    STATIC_REQUIRE(stipp::arithmetic<usize>);
+    STATIC_REQUIRE(stipp::arithmetic<i8>);
+    STATIC_REQUIRE(stipp::arithmetic<i16>);
+    STATIC_REQUIRE(stipp::arithmetic<i32>);
+    STATIC_REQUIRE(stipp::arithmetic<i64>);
+    STATIC_REQUIRE(stipp::arithmetic<isize>);
+
+    STATIC_REQUIRE(stipp::arithmetic<int>);
+    STATIC_REQUIRE(stipp::arithmetic<float>);
+}
+
 TEST_CASE("is_signed", "[traits]") {
+    STATIC_REQUIRE(!stipp::is_signed<u8>::value);
+    STATIC_REQUIRE(!stipp::is_signed<u16>::value);
+    STATIC_REQUIRE(!stipp::is_signed<u32>::value);
+    STATIC_REQUIRE(!stipp::is_signed<u64>::value);
+    STATIC_REQUIRE(!stipp::is_signed<usize>::value);
+    STATIC_REQUIRE(stipp::is_signed<i8>::value);
+    STATIC_REQUIRE(stipp::is_signed<i16>::value);
+    STATIC_REQUIRE(stipp::is_signed<i32>::value);
+    STATIC_REQUIRE(stipp::is_signed<i64>::value);
+    STATIC_REQUIRE(stipp::is_signed<isize>::value);
+
+    STATIC_REQUIRE(stipp::is_signed<int>::value);
+    STATIC_REQUIRE(!stipp::is_signed<unsigned int>::value);
+}
+
+TEST_CASE("is_signed_v", "[traits]") {
     STATIC_REQUIRE(!stipp::is_signed_v<u8>);
     STATIC_REQUIRE(!stipp::is_signed_v<u16>);
     STATIC_REQUIRE(!stipp::is_signed_v<u32>);
@@ -996,7 +1104,39 @@ TEST_CASE("is_signed", "[traits]") {
     STATIC_REQUIRE(!stipp::is_signed_v<unsigned int>);
 }
 
+TEST_CASE("signed_integral", "[traits]") {
+    STATIC_REQUIRE(!stipp::signed_integral<u8>);
+    STATIC_REQUIRE(!stipp::signed_integral<u16>);
+    STATIC_REQUIRE(!stipp::signed_integral<u32>);
+    STATIC_REQUIRE(!stipp::signed_integral<u64>);
+    STATIC_REQUIRE(!stipp::signed_integral<usize>);
+    STATIC_REQUIRE(stipp::signed_integral<i8>);
+    STATIC_REQUIRE(stipp::signed_integral<i16>);
+    STATIC_REQUIRE(stipp::signed_integral<i32>);
+    STATIC_REQUIRE(stipp::signed_integral<i64>);
+    STATIC_REQUIRE(stipp::signed_integral<isize>);
+
+    STATIC_REQUIRE(stipp::signed_integral<int>);
+    STATIC_REQUIRE(!stipp::signed_integral<unsigned int>);
+}
+
 TEST_CASE("is_unsigned", "[traits]") {
+    STATIC_REQUIRE(stipp::is_unsigned<u8>::value);
+    STATIC_REQUIRE(stipp::is_unsigned<u16>::value);
+    STATIC_REQUIRE(stipp::is_unsigned<u32>::value);
+    STATIC_REQUIRE(stipp::is_unsigned<u64>::value);
+    STATIC_REQUIRE(stipp::is_unsigned<usize>::value);
+    STATIC_REQUIRE(!stipp::is_unsigned<i8>::value);
+    STATIC_REQUIRE(!stipp::is_unsigned<i16>::value);
+    STATIC_REQUIRE(!stipp::is_unsigned<i32>::value);
+    STATIC_REQUIRE(!stipp::is_unsigned<i64>::value);
+    STATIC_REQUIRE(!stipp::is_unsigned<isize>::value);
+
+    STATIC_REQUIRE(!stipp::is_unsigned<int>::value);
+    STATIC_REQUIRE(stipp::is_unsigned<unsigned int>::value);
+}
+
+TEST_CASE("is_unsigned_v", "[traits]") {
     STATIC_REQUIRE(stipp::is_unsigned_v<u8>);
     STATIC_REQUIRE(stipp::is_unsigned_v<u16>);
     STATIC_REQUIRE(stipp::is_unsigned_v<u32>);
@@ -1012,7 +1152,39 @@ TEST_CASE("is_unsigned", "[traits]") {
     STATIC_REQUIRE(stipp::is_unsigned_v<unsigned int>);
 }
 
+TEST_CASE("unsigned_integral", "[traits]") {
+    STATIC_REQUIRE(stipp::unsigned_integral<u8>);
+    STATIC_REQUIRE(stipp::unsigned_integral<u16>);
+    STATIC_REQUIRE(stipp::unsigned_integral<u32>);
+    STATIC_REQUIRE(stipp::unsigned_integral<u64>);
+    STATIC_REQUIRE(stipp::unsigned_integral<usize>);
+    STATIC_REQUIRE(!stipp::unsigned_integral<i8>);
+    STATIC_REQUIRE(!stipp::unsigned_integral<i16>);
+    STATIC_REQUIRE(!stipp::unsigned_integral<i32>);
+    STATIC_REQUIRE(!stipp::unsigned_integral<i64>);
+    STATIC_REQUIRE(!stipp::unsigned_integral<isize>);
+
+    STATIC_REQUIRE(!stipp::unsigned_integral<int>);
+    STATIC_REQUIRE(stipp::unsigned_integral<unsigned int>);
+}
+
 TEST_CASE("make_signed", "[traits]") {
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<u8>::type, i8>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<u16>::type, i16>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<u32>::type, i32>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<u64>::type, i64>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<usize>::type, isize>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<i8>::type, i8>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<i16>::type, i16>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<i32>::type, i32>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<i64>::type, i64>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<isize>::type, isize>);
+
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<int>::type, int>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_signed<unsigned int>::type, int>);
+}
+
+TEST_CASE("make_signed_t", "[traits]") {
     STATIC_REQUIRE(std::is_same_v<stipp::make_signed_t<u8>, i8>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_signed_t<u16>, i16>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_signed_t<u32>, i32>);
@@ -1029,6 +1201,23 @@ TEST_CASE("make_signed", "[traits]") {
 }
 
 TEST_CASE("make_unsigned", "[traits]") {
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<u8>::type, u8>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<u16>::type, u16>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<u32>::type, u32>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<u64>::type, u64>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<usize>::type, usize>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<i8>::type, u8>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<i16>::type, u16>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<i32>::type, u32>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<i64>::type, u64>);
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<isize>::type, usize>);
+
+    STATIC_REQUIRE(std::is_same_v<typename stipp::make_unsigned<int>::type, unsigned int>);
+    STATIC_REQUIRE(
+        std::is_same_v<typename stipp::make_unsigned<unsigned int>::type, unsigned int>);
+}
+
+TEST_CASE("make_unsigned_t", "[traits]") {
     STATIC_REQUIRE(std::is_same_v<stipp::make_unsigned_t<u8>, u8>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_unsigned_t<u16>, u16>);
     STATIC_REQUIRE(std::is_same_v<stipp::make_unsigned_t<u32>, u32>);
