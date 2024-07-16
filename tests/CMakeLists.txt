@@ -5,7 +5,6 @@ project(stipp)
 include(FetchContent)
 
 set(CMAKE_BUILD_TYPE Debug CACHE STRING "")
-option(STIPP_UB_TRAITS "Enable testing of type traits that may have undefined behavior" OFF)
 
 include(cmake/settings.cmake)
 
@@ -25,9 +24,6 @@ add_executable(tests tests.cpp)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain warnings)
 target_compile_features(tests PRIVATE cxx_std_20)
 target_include_directories(tests PRIVATE "${PROJECT_SOURCE_DIR}/..")
-if(STIPP_UB_TRAITS)
-    target_compile_definitions(tests PRIVATE -DSTIPP_UB_TRAITS)
-endif()
 enable_lints(tests)
 
 catch_discover_tests(tests)

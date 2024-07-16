@@ -59,18 +59,10 @@ bugs.
 
 ## Limitations
 
-1. Due to being distinct types, `stipp` integers can not be transparently used with
+Due to being distinct types, `stipp` integers can not be transparently used with
 the STL or other libraries that are not aware of `stipp`. Such usage will involve
-frequent casting to and from built-in integer types, which can easily become an
+frequent casting to and from built-in integer types, which could become an
 entrypoint for conversion bugs.
-
-2. By default, STL type traits (and related concepts) such as `std::is_integeral`,
-`std::is_arithmetic`, `std::is_signed`, etc do not work with `stipp` integer types.
-The `STIPP_UB_TRAITS` macro can be defined to override these traits to work with
-`stipp` integer types, but the standard specifies that this has undefined behavior.
-As such, this feature may not work as expected under all compilers and is gated
-behind this feature macro. Note that `stipp` provides it's own version of these
-traits in the `stipp` namespace that will work as expected.
 
 ## How It Works
 `stipp` takes inspiration from `std::byte`, which is defined as:
@@ -116,15 +108,10 @@ character types).
     * `template <typename T> using make_signed_t;`
   * `template <typename T> struct make_unsigned;`
     * `template <typename T> using make_unsigned_t;`
-* For all the type traits above, STL traits can also be made to support `stipp` integers
-  * Requires defining the `STIPP_UB_TRAITS` macro. See [Limitations](#limitations).
 
 ## Project Integration
 To integrate `stipp` into your project, either copy `stipp.hpp` into your project, or
-add the path to this repository to your include directories. If you want to enable
-support for STL type traits (see [Limitations](#limitations)!), additionally define
-the `STIPP_UB_TRAITS` macro, either by compiler argument or by `#define` before
-including `stipp.hpp`.
+add the path to this repository to your include directories.
 
 ### CMake Example
 ```cmake

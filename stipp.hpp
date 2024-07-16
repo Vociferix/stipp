@@ -54,12 +54,6 @@
 // IWYU pragma: no_forward_declare stipp::is_signed
 // IWYU pragma: no_forward_declare stipp::is_unsigned
 
-// Uncomment or define this macro to implement std type traits
-// such as std::is_integral. Be warned: The standard specifies
-// that this has undefined behavior. As such, it is not enabled
-// by default.
-// #define STIPP_UB_TRAITS
-
 #define STIPP_U8_MIN (::stipp::u8{0})
 #define STIPP_U16_MIN (::stipp::u16{0})
 #define STIPP_U32_MIN (::stipp::u32{0})
@@ -821,42 +815,6 @@ STIPP_DEF_FMT(i64)
 STIPP_DEF_FMT(isize)
 
 #undef STIPP_DEF_FMT
-
-#endif
-
-#ifdef STIPP_UB_TRAITS
-
-#define STIPP_DEF_TRAITS(type)                                                 \
-    template <>                                                                \
-    struct std::is_integral<stipp::type> : std::true_type {};                  \
-                                                                               \
-    template <>                                                                \
-    struct std::is_arithmetic<stipp::type> : std::true_type {};                \
-                                                                               \
-    template <>                                                                \
-    struct std::is_signed<stipp::type> : stipp::is_signed<stipp::type> {};     \
-                                                                               \
-    template <>                                                                \
-    struct std::is_unsigned<stipp::type> : stipp::is_unsigned<stipp::type> {}; \
-                                                                               \
-    template <>                                                                \
-    struct std::make_signed<stipp::type> : stipp::make_signed<stipp::type> {}; \
-                                                                               \
-    template <>                                                                \
-    struct std::make_unsigned<stipp::type> : stipp::make_unsigned<stipp::type> {};
-
-STIPP_DEF_TRAITS(u8)
-STIPP_DEF_TRAITS(u16)
-STIPP_DEF_TRAITS(u32)
-STIPP_DEF_TRAITS(u64)
-STIPP_DEF_TRAITS(usize)
-STIPP_DEF_TRAITS(i8)
-STIPP_DEF_TRAITS(i16)
-STIPP_DEF_TRAITS(i32)
-STIPP_DEF_TRAITS(i64)
-STIPP_DEF_TRAITS(isize)
-
-#undef STIPP_DEF_TRAITS
 
 #endif
 
